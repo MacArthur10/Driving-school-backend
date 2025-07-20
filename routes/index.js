@@ -1,0 +1,28 @@
+console.log('Loaded main router');
+const express=require('express');
+const router=express.Router();
+const sujetRouter=require('./sujets');
+const userRouter=require('./users');
+const subscriptionController = require('../controllers/subscriptionController');
+const question_awnserRouter=require('./question_awnser');
+const resultRouter=require('./result');
+const sujetBySubscriptionController = require('../controllers/sujetBySubscriptionController');
+const userProgressController = require('../controllers/userProgressController');
+const userProgressRoutes = require('./userProgress');
+const adminRouter = require('./admin');
+const adminController = require('../controllers/admin');
+const authMiddleware = require('../middleware/authMiddleware');
+const centresRouter = require('./centres');
+const adminsRouter = require('./admins');
+router.use("/sujets",sujetRouter);
+router.use("/question_awnser",question_awnserRouter);
+router.use('/users',userRouter);
+router.use('/admin', adminRouter);
+router.use('/results',resultRouter);
+router.use('/centres', centresRouter);
+router.use('/admins', adminsRouter);
+router.post('/users/:userId/subscriptions', subscriptionController.createSubscription);
+router.put('/users/:userId/subscriptions/cancel', subscriptionController.cancelSubscription);
+router.get('/users/:userId/sujets', sujetBySubscriptionController.getSujetsBySubscription);
+router.use('/progress', userProgressRoutes); // Assurez-vous que cette ligne existe
+module.exports=router;
