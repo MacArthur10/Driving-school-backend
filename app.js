@@ -50,6 +50,6 @@ app.use((err, req, res, next) => {
     res.status(500).json({ error: "An error occurred" });
 });
 
-app.listen(port, hostname, () => {
-    console.log(`Le serveur joue sur http://${hostname}:${port}`);
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Le serveur joue sur http://0.0.0.0:${PORT}`);
 });
