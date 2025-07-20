@@ -12,9 +12,6 @@ const inscritsRouter = require('./routes/inscrits');
 // Middleware pour parser les corps des requêtes JSON
 app.use(express.json());
 
-const hostname = '127.0.0.1';
-const port = process.env.Port || 5000;
-
 connect();
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
