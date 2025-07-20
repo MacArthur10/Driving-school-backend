@@ -27,11 +27,25 @@ app.use(session({
     cookie: { secure: false }
 }));
 
+const allowedOrigins = [
+  'https://superadmin-i0tb.onrender.com',
+  'https://driving-school-admin.onrender.com',
+  'https://driving-school-learners.onrender.com'
+];
 
 app.use(cors({
-    origin: '*', // accepter toutes les requêtes
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // accepter les méthodes
-    allowedHeaders: ['Content-Type', 'Authorization'] // accepter les headers
+  origin: function(origin, callback) {
+    // allow requests with no origin (like mobile apps, curl, etc.)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
 }));
 app.use('/api', routes);
 app.use('/api/inscrits', inscritsRouter);
