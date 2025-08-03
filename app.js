@@ -28,6 +28,9 @@ const allowedOrigins = [
   'https://superadmin-i0tb.onrender.com',
   'https://driving-school-admin.onrender.com',
   'https://driving-school-learners.onrender.com'
+  'http://localhost:3000',
+  'http://localhost:3001',
+  'http://localhost:3002'
 ];
 
 app.use(cors({
